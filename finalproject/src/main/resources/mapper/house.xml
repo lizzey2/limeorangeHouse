@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssafy.repository.HouseListRepository">
+
+<!-- 구 전체 검색 -->
+    <select id="searchAll" resultType="com.ssafy.dto.House" parameterType="java.util.HashMap">
+    select house_idx,house_gu,house_dong,house_name,house_price,house_kind 
+    from dealhouse
+    where
+        <choose>
+            <when test="checkboxArray.size != 0">
+                and house_kind in 
+                <foreach collection="checkboxArray" item="item" index="index" separator="," open="(" close=")">
+                    #{item}
+                </foreach>
+            </when>
+        </choose>
+  </select>
+<!-- 체크박스에서 아파트매매,전월세,주택매매,전월세를 체크하는대로 house_kind에서 1,2,3,4로 받아옴! -->
+<!--    <select id="searchByCheckbox" resultType="com.ssafy.dto.House">
+    select house_idx,house_gu,house_dong,house_name,house_price,house_kind from dealhouse where house_kind=#{house_kind}
+  </select> -->
+  
+ <!-- 구는 선택, 동은 전체 -->
+  <select id="searchDongAll" resultType="com.ssafy.dto.House">
+    select house_idx,house_gu,house_dong,house_name,house_price,house_kind from dealhouse where house_gu=#{house_gu} and house_kind in (#{checkboxArray})
+  </select>
+ <!-- 구, 동 선택 후 검색 -->
+  <select id="search" resultType="com.ssafy.dto.House">
+    select house_idx,house_gu,house_dong,house_name,house_price,house_kind from dealhouse where house_gu=#{house_gu} and house_dong=#{house_dong} and house_kind in (#{checkboxArray})
+  </select>         
+ <!-- 검색창에서 검색 -->   
+  <select id="searchFromChang" resultType="com.ssafy.dto.House"><!-- &lt;= --><!-- <![CDATA[ <= ]]> -->
+    select house_idx,house_gu,house_dong,house_name,house_price,house_kind from dealhouse where (house_gu like concat('%',#{house_gu},'%') or house_dong like concat('%',#{house_dong},'%')) and house_kind in (#{checkboxArray})
+  </select> 
+</mapper>
