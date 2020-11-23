@@ -11,7 +11,9 @@ export default new Vuex.Store({
     userId: null,
     userName: null,
     boards:[],
-    board:{}
+    board: {},
+    notices: [],
+    notice:{},
   },
   getters: {
     getAccessToken(state) {
@@ -30,6 +32,12 @@ export default new Vuex.Store({
     },
     board(state){
       return state.board;
+    },
+    notices(state){
+      return state.notices;
+    },
+    notice(state){
+      return state.notice;
     }
   },
   mutations: {
@@ -48,6 +56,12 @@ export default new Vuex.Store({
     },
     setBoard(state,board){
       state.board=board;
+    },
+    setNotices(state,notices){
+      state.notices = notices;
+    },
+    setNotice(state,notice){
+      state.notice=notice;
     }
   },
   actions: {
@@ -83,6 +97,17 @@ export default new Vuex.Store({
     getBoard(context,url){
       axios.get(url).then(({data})=>{
         context.commit('setBoard',data);
+      });
+    },
+    getNotices(context){
+      axios.get(`${SERVER_URL}/notice/listnotice`)
+      .then(({data})=>{
+        context.commit('setNotices',data);
+      });
+    },
+    getNotice(context,url){
+      axios.get(url).then(({data})=>{
+        context.commit('setNotice',data);
       });
     }
   },

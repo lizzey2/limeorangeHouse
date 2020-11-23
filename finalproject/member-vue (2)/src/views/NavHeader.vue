@@ -6,7 +6,7 @@
     <ul id="pcmenu">
       <li><router-link :to="'/intro'">서비스 소개</router-link></li>
       <li><router-link :to="'/search'">실거래가 조회</router-link></li>
-      <li><router-link :to="'/noticelist'">공지사항</router-link></li>
+      <li><router-link :to="'/listnotice'">공지사항</router-link></li>
       <li><router-link :to="'/listboard'">FAQ</router-link></li>
       <li>
         <router-link :to="'/safeHospital'" id="covid">코로나19</router-link>

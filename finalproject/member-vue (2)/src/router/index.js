@@ -13,6 +13,11 @@ import BoardCreate from "@/views/Board/BoardCreate.vue";
 import BoardRead from "@/views/Board/BoardRead.vue";
 import BoardDelete from "@/views/Board/BoardDelete.vue";
 import BoardUpdate from "@/views/Board/BoardUpdate.vue";
+import NoticeList from "@/views/Notice/NoticeList.vue";
+import NoticeCreate from "@/views/Notice/NoticeCreate.vue";
+import NoticeRead from "@/views/Notice/NoticeRead.vue";
+import NoticeDelete from "@/views/Notice/NoticeDelete.vue";
+import NoticeUpdate from "@/views/Notice/NoticeUpdate.vue";
 Vue.use(VueRouter);
 
 // https://router.vuejs.org/kr/guide/advanced/navigation-guards.html
@@ -23,6 +28,7 @@ const requireAuth = () => (to, from, next) => {
     return next();
   } else next("/login" + nextRoute);
 };
+
 
 const routes = [
   {    path: "/",    name: "Index",    component: Index  },
@@ -37,7 +43,12 @@ const routes = [
   {    path: "/createboard",    name: "BoardCreate",    component: BoardCreate  },
   {    path: "/readboard/:no",    name: "BoardRead",    component: BoardRead  },
   {    path: "/deleteboard",    name: "BoardDelete",    component: BoardDelete  },
-  {    path: "/updateboard",    name: "BoardUpdate",    component: BoardUpdate  },
+  {    path: "/updateboard", name: "BoardUpdate", component: BoardUpdate },
+  {    path: "/listnotice",    name: "NoticeList",    component: NoticeList  },
+  {    path: "/createnotice",    name: "NoticeCreate",    component: NoticeCreate  },
+  {    path: "/readnotice/:no",    name: "NoticedRead",    component: NoticeRead  },
+  {    path: "/deletenotice",    name: "NoticeDelete",    component: NoticeDelete  },
+  {    path: "/updatenotice",    name: "NoticeUpdate",    component: NoticeUpdate  },
 ];
 
 const router = new VueRouter({

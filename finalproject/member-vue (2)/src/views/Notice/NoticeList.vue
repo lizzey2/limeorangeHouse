@@ -3,7 +3,7 @@
     <!-- 템플릿에 ROOT엘리먼트가 필요 -->
     <div style = "text-align:center;">
   <br/>
-  <h1> 자유게시판 </h1>
+  <h1> 공지사항 </h1>
   </div>
   <br/>
    <div v-if="items.length">
@@ -20,20 +20,20 @@
           <th>작성자</th>
           <th>날짜</th>
         </tr>
-        <tr v-for="board in items" :key="board.no">
-          <td>{{ board.no }}</td>
+        <tr v-for="notice in items" :key="notice.no">
+          <td>{{ notice.no }}</td>
           <td>
-            <router-link :to="'readboard/' + board.no">{{ board.title }}</router-link>
+            <router-link :to="'readnotice/' + notice.no">{{ notice.title }}</router-link>
           </td>
-          <td>{{ board.writer }}</td>
-          <td>{{ getFormatDate(board.regtime) }}</td>
+          <td>{{ notice.writer }}</td>
+          <td>{{ getFormatDate(notice.regtime) }}</td>
         </tr>
       </table>
    </div>
     <div v-else class="text-center">
       게시글이 없습니다.
     </div>
-    <div class="text-right">
+    <div v-if ="(getUserId===('admin'||'manager'))" class="text-right" >
       <button class="btn btn-primary" @click="movePage">등록</button>
     </div>
   </div>
@@ -49,18 +49,19 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(['boards']),
+    ...mapGetters(['getUserId','notices']),
   },
   created() {
-    this.$store.dispatch('getBoards');
-    this.items=this.boards;
+    this.$store.dispatch('getNotices');
+    this.$store.dispatch('getUserId');
+    this.items=this.notices;
   },
   methods: {
     getFormatDate(regtime) {
       return moment(new Date(regtime)).format('YYYY.MM.DD');
     },
     movePage() {
-      this.$router.push('/createboard');
+      this.$router.push('/createnotice');
     },
   },
 };
