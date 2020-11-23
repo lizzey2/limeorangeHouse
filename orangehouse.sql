@@ -42,9 +42,9 @@ values('123', '아파트?', '이사할까욥'),
       ('123', '라임오렌지', '나는 라임이 더 좋아');
       
 insert into member(userid, username, userpwd, email, address) 
-values('ssafy', '싸피', 'ssafy','lizzey2@naver.com','서울시 동대문구');
-values('123', '일이삼', '123','123@12.com','일이삼이네집');
-values('admin', '관리자', 'admin','admin@naver.com','관리자네집');
+values('ssafy', '싸피', 'ssafy','lizzey2@naver.com','서울시 동대문구'),
+values('123', '일이삼', '123','123@12.com','일이삼이네집'),
+values('admin', '관리자', 'admin','admin@naver.com','관리자네집'),
 values('manager', '매니저', 'manager','manager@naver.com','네집');
 
 commit;
